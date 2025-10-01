@@ -9,7 +9,7 @@ description = "Python-based DJ/remix library management and stems workflow utili
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [
-  {name = "Alex Sciuto", email = ""}
+  {name = "Alex Sciuto"}
 ]
 dependencies = [
   "typer>=0.12.0",
@@ -31,3 +31,9 @@ dev = [
 
 [project.scripts]
 djprep = "djprep.cli:app"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

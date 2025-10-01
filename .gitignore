@@ -33,3 +33,4 @@ cache/
 # Misc
 .idea/
 *.tmp
+config/library-manifest.json

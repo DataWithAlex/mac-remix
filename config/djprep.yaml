@@ -1,0 +1,25 @@
+library_root: "./library"
+tracks_subdir: Tracks
+stems_subdir: Stems
+playlists_subdir: Playlists
+manifest_extension: .json
+stem_model: htdemucs
+audio_format: wav
+performance_format:
+  enabled: true
+  codec: mp3
+  bitrate: 320k
+normalization:
+  enabled: true
+  target_lufs: -8.5
+  true_peak: -1.0
+analysis:
+  bpm: true
+  key: true
+  key_notation: camelot
+  skip_if_tagged: true
+integration:
+  serato:
+    enable_smart_crates: true
+  rekordbox:
+    enable_intelligent_playlists: true

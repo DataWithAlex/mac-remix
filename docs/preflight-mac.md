@@ -1,6 +1,6 @@
 # macOS Preflight Checklist (before the DDJ-FLX4 arrives)
 
-_Date verified: 28 September 2025 (macOS Sonoma 14.6)._
+_Updated: 01 October 2025 (macOS Sonoma 14.6)._
 
 ## 1. System Requirements
 
@@ -11,32 +11,34 @@ _Date verified: 28 September 2025 (macOS Sonoma 14.6)._
 ## 2. Install Core Tools
 
 ```bash
-# 1. Audio tooling
+# Audio tooling
 brew install ffmpeg
-
-# 2. Python environment (3.11 recommended)
-/usr/bin/python3 -m venv ~/djenv
-source ~/djenv/bin/activate
-pip install --upgrade pip
-pip install -e /Users/alexsciuto/Library/Mobile\ Documents/com~apple~CloudDocs/DataWithAlex/mac-remix
-
-# 3. Optional developer tooling
-pip install ruff black
 ```
 
-## 3. Create Library Skeleton
+(Optional) add formatting helpers once the virtualenv is online:
+`pip install ruff black`.
+
+## 3. Bootstrap The Repo
 
 ```bash
 cd /Users/alexsciuto/Library/Mobile\ Documents/com~apple~CloudDocs/DataWithAlex/mac-remix
-cp config/djprep.example.yaml config/djprep.yaml
-# edit library_root if you store music externally
-python3 -m djprep init
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python scripts/setup_repo.py
 ```
 
-Confirm the following folders exist (Finder shortcuts in parenthesis):
-- `~/Music/DJ/Tracks` (⌘⇧G → `~/Music/DJ/Tracks`)
-- `~/Music/DJ/Stems`
-- `~/Music/DJ/Playlists`
+The helper script will:
+- copy `config/djprep.example.yaml` ➜ `config/djprep.yaml` and ask for the library root (defaults to `./library`).
+- install `djprep` (tries editable mode first, then falls back to regular install if needed).
+- create `raw-songs/` and run `djprep init` so `library/Tracks`, `library/Stems`, and `library/Playlists` exist.
+
+If you prefer to manage things manually, follow the prompts as a guide and run the equivalent commands yourself.
+
+Confirm the following repo-relative folders exist afterwards:
+- `library/Tracks`
+- `library/Stems`
+- `library/Playlists`
 
 ## 4. Install DJ Software
 

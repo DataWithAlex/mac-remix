@@ -2,7 +2,7 @@
 
 mac-remix is a Python toolkit and documentation set that turns your macOS workstation into a DJ/remix preparation hub. It combines a reproducible folder structure, Typer-based CLI, and step-by-step guides for integrating with Serato DJ Lite/Pro, rekordbox 7+, and the Pioneer DDJ-FLX4 controller. The goal is to automate repetitive prep work—ingesting tracks, creating stems, tagging BPM/keys, normalising audio—and hand off a performance-ready library to your DJ software.
 
-> **Current date:** 28 September 2025. All references to "today" in the docs resolve to this date so future you can spot when instructions need refreshing.
+> **Current date:** 01 October 2025. All references to "today" in the docs resolve to this date so future you can spot when instructions need refreshing.
 
 ---
 
@@ -43,25 +43,20 @@ mac-remix/
 ## Quick Start (first push checklist)
 
 1. **Git init** (already handled by this repo scaffold, see below for verification).
-2. **Create a Python virtual environment** and install dependencies:
+2. **Create a Python virtual environment** and upgrade `pip`:
    ```bash
    cd /Users/alexsciuto/Library/Mobile\ Documents/com~apple~CloudDocs/DataWithAlex/mac-remix
    python3 -m venv .venv
    source .venv/bin/activate
-   pip install --upgrade pip
-   pip install -e .
+   python -m pip install --upgrade pip
    ```
-3. **Copy the example config** and tailor paths before running the CLI:
+3. **Run the guided setup helper** (installs the package, copies config, runs `djprep init`):
    ```bash
-   cp config/djprep.example.yaml config/djprep.yaml
-   # edit the file so library_root points to ~/Music/DJ or your preferred path
+   python scripts/setup_repo.py
    ```
-4. **Seed the library folders** (creates `Tracks/`, `Stems/`, `Playlists/`):
-   ```bash
-   djprep init
-   ```
-5. **Ingest your first `.mp3` track** (see [Ingesting MP3s](#ingesting-mp3s-step-by-step)).
-6. **Read the integration docs** under `docs/integration/` to connect your DJ software before plugging in the DDJ-FLX4.
+   Accept the default library root (`./library`) or point it at another path when prompted.
+4. **Ingest your first `.mp3` track** (see [Ingesting MP3s](#ingesting-mp3s-step-by-step)).
+5. **Read the integration docs** under `docs/integration/` to connect your DJ software before plugging in the DDJ-FLX4.
 
 After you are satisfied, stage files with `git add .` and push to GitHub (`git commit -m "Initial commit" && git remote add origin <URL> && git push -u origin main`).
 
@@ -77,11 +72,11 @@ After you are satisfied, stage files with `git add .` and push to GitHub (`git c
    djprep ingest "~/Downloads/Track.mp3" --artist "Artist" --title "Track (Extended Mix)"
    ```
 3. **What happens automatically**:
-   - Files are copied to `~/Music/DJ/Tracks/Artist - Title.mp3` (based on tags or overrides).
+   - Files are copied to `library/Tracks/Artist - Title.mp3` (or the folder you configured).
    - Each ingest is logged inside `config/library-manifest.json` so you can audit changes.
    - The CLI reminds you of next steps: run stems, analysis, or exports.
 4. **Verify inside your DJ application**:
-   - Drag `~/Music/DJ/Tracks/` into Serato or use rekordbox `File ▸ Import Folder…`.
+   - Drag `library/Tracks/` (or your configured location) into Serato or use rekordbox `File ▸ Import Folder…`.
    - Smart Crates/Intelligent Playlists populate based on the metadata written in later steps.
 5. **Continue with stems or normalization** using the workflows in `docs/workflows/`.
 
