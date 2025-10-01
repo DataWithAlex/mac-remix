@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.env
+.venv
+venv/
+ENV/
+*.egg
+*.log
+
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Audio outputs
+*.wav
+*.mp3
+*.flac
+*.m4a
+*.aiff
+outputs/
+cache/
+
+# Virtualenvs
+.djenv/
+
+# VSCode
+.vscode/
+
+# Misc
+.idea/
+*.tmp
